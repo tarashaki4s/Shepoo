@@ -1,0 +1,47 @@
+package com.poly.model;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "BinhLuan")
+public class BinhLuan implements Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "MaBinhLuan")
+	private int maBL;
+	private String noiDung;
+	private int danhGia;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "NgayBinhLuan")
+	private Date ngayBL = new Date();
+
+	@ManyToOne
+	@JoinColumn(name="MaSanPham")
+	private SanPham sanPham;
+	
+	@ManyToOne
+	@JoinColumn(name="maNguoiDung")
+	private NguoiDung nguoiDung;
+}
